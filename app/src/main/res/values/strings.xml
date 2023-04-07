@@ -5,8 +5,11 @@
     <string name="album">Album :</string>
     <string name="fav">Favoris :</string>
     <string name="listen">Ecouter</string>
+    <string name="pause">Pause</string>
     <string name="gotodeezer">Voir sur Deezer</string>
     <string name="np">Now Playing</string>
     <string name="search">Rechercher</string>
     <string name="btnSearch">Search</string>
+
+    <string name="getListUrl">https://api.deezer.com/search</string>
 </resources>

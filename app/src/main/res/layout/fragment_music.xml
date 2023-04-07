@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MusicActivity">
+    tools:context=".MusicFragment">
 
     <TextView
         android:id="@+id/textViewNP"
@@ -16,13 +16,13 @@
         android:text="@string/np" />
 
     <TextView
-        android:id="@+id/textViewTitre"
+        android:id="@+id/textViewMusic"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:textSize="24sp"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
         android:textStyle="bold"
+        android:layout_marginTop="10dp"
         android:textAlignment="center"
-        android:layout_weight="1"
         android:text="text" />
 
     <LinearLayout
@@ -31,6 +31,7 @@
         android:orientation="horizontal"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginTop="24dp"
         >
 
         <TextView
@@ -44,6 +45,8 @@
         <TextView
             android:id="@+id/textViewArtist"
             android:layout_width="0dp"
+            android:textSize="25sp"
+            android:layout_marginStart="20dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
              />
@@ -67,7 +70,9 @@
         <TextView
             android:id="@+id/textViewAlbum"
             android:layout_width="0dp"
+            android:layout_marginStart="20dp"
             android:layout_height="wrap_content"
+            android:textSize="25sp"
             android:layout_weight="3"
              />
     </LinearLayout>
@@ -92,24 +97,22 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:gravity="start"
              />
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:layout_margin="4dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="2dp"
         android:layout_gravity="center"
+        android:layout_marginTop="100dp"
         >
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:id="@+id/imageViewCover"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:layout_gravity="center_vertical"
             app:srcCompat="@drawable/ic_launcher_foreground" />
 
@@ -117,22 +120,23 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="bottom|center"
         android:layout_weight="1"
-        android:gravity="center"
-
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/buttonListen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/listen" />
+            android:text="@string/listen"
+            android:layout_margin="10dp"/>
 
         <Button
             android:id="@+id/buttonDeezer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/gotodeezer" />
+            android:text="@string/gotodeezer"
+            android:layout_margin="10dp"/>
     </LinearLayout>
 </LinearLayout>

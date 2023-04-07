@@ -1,29 +1,80 @@
 package com.example.deezactivity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.widget.ListView;
+import android.view.MenuItem;
 
-import com.example.deezactivity.Adapters.MusicItemAdapter;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import com.example.deezactivity.Interface.IOnSelectMusic;
 import com.example.deezactivity.Model.Music;
 
-import java.util.ArrayList;
+public class MainActivity extends AppCompatActivity implements IOnSelectMusic {
 
-public class MainActivity extends AppCompatActivity {
+    private ListFragment listFragment;
+    private MusicFragment musicFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ListView listMusics = findViewById(R.id.listViewMusics);
+        if(isMobile()) {
+            listFragment = new ListFragment();
+            musicFragment = new MusicFragment();
 
-        ArrayList<Music> musics = new ArrayList<Music>();
-        musics.add(new Music("Beautiful Light", "Origins", "Uppermost", "https://e-cdns-images.dzcdn.net/images/artist/11f5fc92d5acfb2c0e3dc95aaf88c2fd/250x250-000000-80-0-0.jpg", "https://cdns-preview-e.dzcdn.net/stream/c-e8a81e4bfba85d6162b8d4b5cca03225-7.mp3", "https://www.deezer.com/artist/185743"));
-        musics.add(new Music("Flashback", "One", "Uppermost", "https://e-cdns-images.dzcdn.net/images/artist/11f5fc92d5acfb2c0e3dc95aaf88c2fd/250x250-000000-80-0-0.jpg", "https://cdns-preview-3.dzcdn.net/stream/c-3626e5601d9dc8559d82f94b8f7fff37-5.mp3", "https://www.deezer.com/artist/185743"));
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.frameLayout, listFragment)
+                    .add(R.id.frameLayout, musicFragment)
+                    .hide(musicFragment)
+                    .commit();
+            getSupportActionBar();
+        } else {
+            listFragment = (ListFragment) getSupportFragmentManager().findFragmentById(R.id.listFragment);
+            musicFragment = (MusicFragment) getSupportFragmentManager().findFragmentById(R.id.musicFragment);
+            getSupportFragmentManager().beginTransaction()
+                    .show(musicFragment)
+                    .commit();
+        }
+        listFragment.setListener(this);
+    }
 
-        MusicItemAdapter musicAdapter = new MusicItemAdapter(musics, this);
-        listMusics.setAdapter(musicAdapter);
+    @Override
+    public void onSelectedMusic(Music music) {
+        musicFragment.setMusic(music);
+        getSupportFragmentManager().beginTransaction()
+            .hide(listFragment)
+            .show(musicFragment)
+            .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(isMobile() && musicFragment.isVisible()) {
+            getSupportFragmentManager().beginTransaction()
+                .hide(musicFragment)
+                .show(listFragment)
+                .commit();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (musicFragment.isVisible()) {
+            getSupportFragmentManager().beginTransaction()
+                .hide(musicFragment)
+                .show(listFragment)
+                .commit();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private boolean isMobile() {
+        return findViewById(R.id.frameLayout) != null;
     }
 }

@@ -54,11 +54,11 @@
             android:textSize="20sp" />
     </LinearLayout>
 
-    <CheckBox
+<!--    <CheckBox
         android:id="@+id/checkBox"
         style="@android:style/Widget.CompoundButton.CheckBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_weight="1" />
+        android:layout_weight="1" />-->
 </LinearLayout>
